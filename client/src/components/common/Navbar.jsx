@@ -122,8 +122,8 @@ export default function Navbar() {
 
           {/* Right side */}
           <div className="flex items-center gap-3">
-            {/* Search */}
-            <div className="hidden md:block" style={{ position: 'relative' }}>
+            {/* Search — visible on all screens */}
+            <div style={{ position: 'relative' }}>
               {!searchOpen ? (
                 <button onClick={() => { setSearchOpen(true); setTimeout(() => document.getElementById('nav-search-input')?.focus(), 100); }}
                   style={{ color: '#0F172A', background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', transition: 'color 0.2s' }}
@@ -132,7 +132,7 @@ export default function Navbar() {
                   <Search size={20} />
                 </button>
               ) : (
-                <form onSubmit={handleSearchSubmit} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', background: '#F8FAFC', border: '1px solid #E5E7EB', borderRadius: '8px', padding: '0.3rem 0.7rem' }}>
+                <form onSubmit={handleSearchSubmit} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', background: '#F8FAFC', border: '1px solid #E5E7EB', borderRadius: '8px', padding: '0.3rem 0.7rem', position: 'absolute', right: 0, top: '50%', transform: 'translateY(-50%)', width: 'max(200px, 45vw)', maxWidth: '280px', zIndex: 10 }}>
                   <Search size={14} style={{ color: '#1E3A8A', flexShrink: 0 }} />
                   <input
                     id="nav-search-input"
@@ -141,7 +141,7 @@ export default function Navbar() {
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     onBlur={() => { if (!searchQuery) setSearchOpen(false); }}
-                    style={{ background: 'none', border: 'none', outline: 'none', color: '#0F172A', width: 160, fontSize: '0.82rem', fontWeight: 600 }}
+                    style={{ background: 'none', border: 'none', outline: 'none', color: '#0F172A', flex: 1, minWidth: 0, fontSize: '0.82rem', fontWeight: 600 }}
                   />
                   {searchQuery && (
                     <button type="button" onClick={() => { setSearchQuery(''); setSearchOpen(false); }} style={{ background: 'none', border: 'none', color: '#888', cursor: 'pointer', fontSize: '1rem', lineHeight: 1 }}>×</button>
@@ -275,20 +275,6 @@ export default function Navbar() {
         {/* Mobile Nav */}
         {mobileOpen && (
           <div style={{ borderTop: '1px solid #E5E7EB', padding: '1rem 0' }}>
-            {/* Search in mobile */}
-            <form onSubmit={handleSearchSubmit} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', background: '#F8FAFC', border: '1px solid #E5E7EB', borderRadius: '8px', padding: '0.5rem 0.8rem', marginBottom: '0.75rem' }}>
-              <Search size={14} style={{ color: '#1E3A8A', flexShrink: 0 }} />
-              <input
-                type="text"
-                placeholder="Search cars, parts..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                style={{ background: 'none', border: 'none', outline: 'none', color: '#0F172A', flex: 1, fontSize: '0.9rem', minWidth: 0 }}
-              />
-              {searchQuery && (
-                <button type="button" onClick={() => setSearchQuery('')} style={{ background: 'none', border: 'none', color: '#888', cursor: 'pointer' }}>×</button>
-              )}
-            </form>
             {/* Pincode in mobile */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', background: '#F8FAFC', border: '1px solid #E5E7EB', borderRadius: '8px', padding: '0.5rem 0.8rem', marginBottom: '0.75rem' }}>
               <MapPin size={14} style={{ color: '#1E3A8A', flexShrink: 0 }} />
