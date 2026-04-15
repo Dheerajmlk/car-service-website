@@ -29,7 +29,6 @@ const allowedOrigins = [
   'http://localhost:5174'
 ];
 
-const cors = require('cors');
 
 app.use(cors({
   origin: [
